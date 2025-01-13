@@ -1,24 +1,15 @@
-import { useState } from 'react'
+import { useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom'
+// Context
+import GlobalContext from '../../contexts/GlobalContext';
 // Components
-import PostCard from '../../components/PostCard'
-
-// API Url
-const apiUrl = import.meta.env.VITE_API_URL;
+import PostsList from "../../components/PostsList"
 
 function PostsPage() {
+    const { getTags, tagsList, filter, setFilter } = useContext(GlobalContext);
 
-    // VARIABILI DI STATO
-    // Filter 
-    const [filter, setFilter] = useState("all");
-
-    // Delete Function
-    const handleDelete = (idToDelete) => {
-        axios.delete(`${apiUrl}/posts/${idToDelete}`).then((resp) => {
-            const filteredList = postsList.filter(curArticle => curArticle.id !== idToDelete)
-            setPostsList(filteredList);
-        })
-    }
+    // Show Tags
+    useEffect(() => getTags(), [])
 
     return (
         <>
@@ -40,14 +31,7 @@ function PostsPage() {
                         </div>
                     </div>
                     <div className="row">
-                        {postsList.length !== 0 ? postsList.map((curPost, index) =>
-                            <div key={index} className="col-4 mb-3">
-                                <PostCard
-                                    url={apiUrl}
-                                    post={curPost}
-                                    deleteHandler={handleDelete}
-                                />
-                            </div>) : <p>Nessun Post Disponibile</p>}
+                        <PostsList />
                     </div>
                 </section >
             </main>
