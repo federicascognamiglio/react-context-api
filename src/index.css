@@ -1,0 +1,19 @@
+.my-home-bg {
+    background-image: url(../images/background.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.my-title {
+    color: #816d51;
+}
+
+.my-btn {
+    background-color: #816d51;
+    color: #ffffff;
+}
+
+.my-btn-outline {
+    border: 1px solid #816d51;
+    color: #816d51;
+}
